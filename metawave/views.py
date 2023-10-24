@@ -1,9 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
-# helloworld/views.py
 
-from django.http import HttpResponse
+def mainPage(request):
+    return render(request, "mainPage.html")
 
-def MainPage(request):
-    return HttpResponse("MainPage")
+
+def information(request):
+    return render(request, "information.html")
