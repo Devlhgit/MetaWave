@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class HelloworldConfig(AppConfig):
+class MetaWaveConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "helloworld"
+    name = "metawave"

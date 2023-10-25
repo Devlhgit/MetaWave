@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from metawave import views
+from config import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.MainPage) 
+    path("admin/", admin.site.urls),
+    path("", views.MainPage),
 ]
