@@ -1,3 +1,6 @@
 from django.contrib import admin
+from metawave.models import picture
 
-# Register your models here.
+@admin.register(picture)
+class Admin(admin.ModelAdmin):
+    pass

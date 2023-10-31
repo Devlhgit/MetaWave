@@ -3,9 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main Page</title>
+    <title>Metawave</title>
   </head>
   <body>
     <h1>Main Page</h1>
+    <a href="/admin"><h1>To Admin Page</h1></a>
+    <br />
+    <h2>Upload an Image</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %} {{ form.as_p }}
+      <p>그림 이름</p>
+      <input name="name" type="text" />
+      <p>작가 명</p>
+      <input name="author" type="text" /><br /><br />
+      <input name="picture" type="file" />
+      <button type="submit">Upload</button>
+    </form>
   </body>
 </html>
