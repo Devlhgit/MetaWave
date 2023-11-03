@@ -3,4 +3,4 @@ from metawave.models import picture
 
 @admin.register(picture)
 class Admin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'author', 'picture']

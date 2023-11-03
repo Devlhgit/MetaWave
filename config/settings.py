@@ -79,7 +79,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'metawave',
+        'NAME': 'Metawave',
         'USER': 'root',
         'PASSWORD': 'mysql',
         'HOST': 'localhost',
