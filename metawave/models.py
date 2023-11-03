@@ -122,20 +122,20 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class MetawavePicture(models.Model):
-    name = models.CharField(max_length=255, blank=True, null=True)
-    age = models.IntegerField(blank=True, null=True)
-    email = models.CharField(max_length=255, blank=True, null=True)
+class MusicList(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True)
+    artist = models.CharField(max_length=255, blank=True, null=True)
+    album = models.CharField(max_length=255, blank=True, null=True)
+    genre = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'metawave_picture'
+        db_table = 'music_list'
 
 
 class picture(models.Model):
-    name = models.CharField(max_length=100, null=True)
-    author = models.CharField(max_length=100, null=True)
     picture = models.ImageField(upload_to='pictures', null=True)
 
-    def __str__(self):
-        return self.name if self.name else "작가 이름이 입력되지 않았습니다."
+    class Meta:
+        managed = False
+        db_table = 'picture'
