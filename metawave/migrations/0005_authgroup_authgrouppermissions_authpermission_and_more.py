@@ -194,7 +194,7 @@ class Migration(migrations.Migration):
                 ("email", models.CharField(blank=True, max_length=255, null=True)),
             ],
             options={
-                "db_table": "metawave_pictures",
+                "db_table": "picture",
                 "managed": False,
             },
         ),
