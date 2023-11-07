@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Metawave',
-        'USER': 'metawaveadmin',
-        'PASSWORD': 'metawaveadmin',
+        'USER': 'root',
+        'PASSWORD': 'mysql',
         'HOST': 'localhost',
         'PORT': '3306',
     }
