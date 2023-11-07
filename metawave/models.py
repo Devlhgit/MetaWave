@@ -133,7 +133,9 @@ class MusicList(models.Model):
         db_table = 'music_list'
 
 
-class picture(models.Model):
+class inputPicture(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    author = models.CharField(max_length=255, blank=True, null=True)
     picture = models.ImageField(upload_to='pictures', null=True)
 
     class Meta:

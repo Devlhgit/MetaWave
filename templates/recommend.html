@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +6,11 @@
     <title>Recommend</title>
   </head>
   <body>
-    <h1>노래 추천 LIST</h1>
-    <img src="{{ uploaded_file.url }}" alt="" />
+    <h1>Recommended Music Playlist</h1>
+    <ul>
+      {% for item in random_playList %}
+      <li>제목 : {{ item.title }}, 아티스트 : {{ item.artist }}, 앨범 : {{ item.album }}, 장르 : {{ item.genre }}</li>
+      {% endfor %}
+    </ul>
   </body>
 </html>
