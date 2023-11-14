@@ -7,10 +7,30 @@
   </head>
   <body>
     <h1>Recommended Music Playlist</h1>
-    <ul>
+    {% if picture %}
+    <p>Name : {{ picture.name }}</p>
+    <p>Author : {{ picture.author }}</p>
+    <img src="{{ picture.picture.url }}" alt="Uploaded picture" style="width: 50%; height: 50%" />
+    {% else %}
+    <p>No picture Uploaded.</p>
+    {% endif %}
+    <table border="1">
+      <tr>
+        <th>순서</th>
+        <th>제목</th>
+        <th>아티스트</th>
+        <th>앨범</th>
+        <th>장르</th>
+      </tr>
       {% for item in random_playList %}
-      <li>제목 : {{ item.title }}, 아티스트 : {{ item.artist }}, 앨범 : {{ item.album }}, 장르 : {{ item.genre }}</li>
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ item.title }}</td>
+        <td>{{ item.artist }}</td>
+        <td>{{ item.album }}</td>
+        <td>{{ item.genre }}</td>
+      </tr>
       {% endfor %}
-    </ul>
+    </table>
   </body>
 </html>

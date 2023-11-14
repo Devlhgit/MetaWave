@@ -136,7 +136,7 @@ class MusicList(models.Model):
 class inputPicture(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     author = models.CharField(max_length=255, blank=True, null=True)
-    picture = models.ImageField(upload_to='pictures', null=True)
+    picture = models.ImageField(upload_to='pictures/', null=True)
 
     class Meta:
         managed = False

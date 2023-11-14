@@ -16,16 +16,16 @@ def mainPage(request):
         author = request.POST['author']
         pictures = request.FILES['picture']
 
-        picture_instance = inputPicture(name=request.POST['name'], author=request.POST['author'], picture=request.FILES['picture'])
+        picture_instance = inputPicture(name=name, author=author, picture=pictures)
         picture_instance.save()
         
-        return render(request, 'recommend.html')
+        return render(request, 'recommend.html', {'picture' : picture_instance})
     
     return render(request, "mainPage.html")
 
 
-def recommend(request):
-    return render(request, 'recommend.html',)
+# def recommend(request):
+#     return render(request, 'recommend.html',)
 
 
 # Serializer
