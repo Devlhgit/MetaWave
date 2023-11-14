@@ -1,12 +1,8 @@
 from django.contrib import admin
-from .models import MusicList, inputPicture
+from .models import inputPicture, MoodthemePlaylist
 
 import base64
 from django.utils.safestring import mark_safe
-
-@admin.register(MusicList)
-class Admin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'artist', 'album', 'genre']
 
 
 @admin.register(inputPicture)
@@ -19,3 +15,9 @@ class Admin(admin.ModelAdmin):
         return mark_safe(image_tag)
 
     display_picture.short_description = 'Picture'
+
+
+@admin.register(MoodthemePlaylist)
+class Admin(admin.ModelAdmin):
+    list_display = ['id', 'track_id', 'artist_id', 'album_id', 'duration', 'tags']
+

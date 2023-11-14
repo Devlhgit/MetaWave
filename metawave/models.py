@@ -122,15 +122,18 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class MusicList(models.Model):
-    title = models.CharField(max_length=255, blank=True, null=True)
-    artist = models.CharField(max_length=255, blank=True, null=True)
-    album = models.CharField(max_length=255, blank=True, null=True)
-    genre = models.CharField(max_length=255, blank=True, null=True)
+class MoodthemePlaylist(models.Model):
+    id = models.IntegerField(db_column='id', primary_key=True, blank=True)
+    track_id = models.TextField(db_column='TRACK_ID', blank=True, null=True) 
+    artist_id = models.TextField(db_column='ARTIST_ID', blank=True, null=True)
+    album_id = models.TextField(db_column='ALBUM_ID', blank=True, null=True)
+    path = models.TextField(db_column='PATH', blank=True, null=True)
+    duration = models.FloatField(db_column='DURATION', blank=True, null=True)
+    tags = models.TextField(db_column='TAGS', blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'music_list'
+        db_table = 'moodtheme_playlist'
 
 
 class inputPicture(models.Model):
