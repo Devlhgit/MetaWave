@@ -22,7 +22,7 @@ def mainPage(request):
         picture_instance = inputPicture(name=name, author=author, picture=pictures, musicGenre=musicGenre)
         picture_instance.save()
 
-        # DB에서 선택한 장르와 같은 랜덤한 10개의 PlayList 출력
+        # 선택한 장르와 같은 랜덤한 10개의 PlayList 출력
         random_playList = MoodthemePlaylist.objects.filter(Q(tags=musicGenre) | Q(tags=musicGenre)).order_by('?')[:10]
 
         return render(request, 'recommend.html', 
