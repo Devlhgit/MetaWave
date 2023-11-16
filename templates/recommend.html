@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recommend</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet" />
+    <title>Bootstrap Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> -->
+  </head>
+  <body>
+    <h1>Recommended Music Playlist</h1>
+    {% if picture %}
+    <p>그림 명 : {{ picture.name }}</p>
+    <p>작가 명 : {{ picture.author }}</p>
+    <p>장르 : {{ picture.musicGenre }}</p>
+    <img src="{{ picture.picture.url }}" alt="Uploaded picture" style="width: 50%; height: 50%" />
+    {% else %}
+    <p>No picture Uploaded.</p>
+    {% endif %}
+    <table border="1">
+      <tr>
+        <th>순서</th>
+        <th>ID</th>
+        <th>이름</th>
+        <th>아티스트</th>
+        <th>앨범</th>
+        <th>재생시간(s)</th>
+        <th>장르</th>
+        <th>PLAY</th>
+      </tr>
+      {% for item in random_playList %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ item.id }}</td>
+        <td>{{ item.track_id }}</td>
+        <td>{{ item.artist_id }}</td>
+        <td>{{ item.album_id }}</td>
+        <td>{{ item.duration }}</td>
+        <td>{{ item.tags }}</td>
+        <th>▷</th>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

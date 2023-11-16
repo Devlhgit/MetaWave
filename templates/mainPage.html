@@ -4,8 +4,97 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Metawave</title>
+<<<<<<< HEAD
   </head>
   <body>
     <h1>Metawave Main Page</h1>
+=======
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet" />
+    <title>Bootstrap Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> -->
+  </head>
+  <body>
+    <h1>Main Page</h1>
+    <a href="/admin"><h1>To Admin Page</h1></a>
+    <br />
+    <h2>Upload an Image</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %} {{ form.as_p }}
+      <p>그림 명</p>
+      <input name="name" type="text" />
+
+      <p>작가 명</p>
+      <input name="author" type="text" /><br /><br />
+
+      <label for="musicGenre">장르 선택</label>
+      <br /><br />
+      <select id="musicGenre" name="musicGenre">
+        <option value="background" name="Background">Background</option>
+        <option value="film" name="Film">Film</option>
+        <option value="melancholic" name="Melancholic">Melancholic</option>
+        <option value="calm" name="Calm">Calm</option>
+        <option value="melodic" name="Melodic">Melodic</option>
+        <option value="children" name="Children">Children</option>
+        <option value="meditative" name="Meditative">Meditative</option>
+        <option value="cool" name="Cool">Cool</option>
+        <option value="documentary" name="Documentary">Documentary</option>
+        <option value="emotional" name="Emotional">Emotional</option>
+        <option value="relaxing" name="Relaxing">Relaxing</option>
+        <option value="love" name="Love">Love</option>
+        <option value="drama" name="Drama">Drama</option>
+        <option value="adventure" name="Adventure">Adventure</option>
+        <option value="heavy" name="Heavy">Heavy</option>
+        <option value="dark" name="Dark">Dark</option>
+        <option value="energetic" name="Energetic">Energetic</option>
+        <option value="retro" name="Retro">Retro</option>
+        <option value="ballad" name="Ballad">Ballad</option>
+        <option value="advertising" name="Advertising">Advertising</option>
+        <option value="epic" name="Epic">Epic</option>
+        <option value="action" name="Action">Action</option>
+        <option value="dramatic" name="Dramatic">Dramatic</option>
+        <option value="deep" name="Deep">Deep</option>
+        <option value="inspiring" name="Inspiring">Inspiring</option>
+        <option value="soft" name="Soft">Soft</option>
+        <option value="fun" name="Fun">Fun</option>
+        <option value="horror" name="Horror">Horror</option>
+        <option value="funny" name="Funny">Funny</option>
+        <option value="positive" name="Positive">Positive</option>
+        <option value="sad" name="Sad">Sad</option>
+        <option value="happy" name="Happy">Happy</option>
+        <option value="summer" name="Summer">Summer</option>
+        <option value="dream" name="Dream">Dream</option>
+        <option value="romantic" name="Romantic">Romantic</option>
+        <option value="hopeful" name="Hopeful">Hopeful</option>
+        <option value="groovy" name="Groovy">Groovy</option>
+        <option value="space" name="Space">Space</option>
+        <option value="soundscape" name="Soundscape">Soundscape</option>
+        <option value="slow" name="Slow">Slow</option>
+        <option value="sport" name="Sport">Sport</option>
+        <option value="sexy" name="Sexy">Sexy</option>
+        <option value="fast" name="Fast">Fast</option>
+        <option value="nature" name="Nature">Nature</option>
+        <option value="commercial" name="Commercial">Commercial</option>
+        <option value="mellow" name="Mellow">Mellow</option>
+        <option value="holiday" name="Holiday">Holiday</option>
+        <option value="ambiental" name="Ambiental">Ambiental</option>
+        <option value="uplifting" name="Uplifting">Uplifting</option>
+        <option value="christmas" name="Christmas">Christmas</option>
+        <option value="game" name="Game">Game</option>
+        <option value="travel" name="Travel">Travel</option>
+        <option value="motivational" name="Motivational">Motivational</option>
+        <option value="party" name="Party">Party</option>
+        <option value="upbeat" name="Upbeat">Upbeat</option>
+        <option value="movie" name="Movie">Movie</option>
+        <option value="powerful" name="Powerful">Powerful</option>
+        <option value="corporate" name="Corporate">Corporate</option>
+        <option value="trailer" name="Trailer">Trailer</option>
+        <option value="fun" name="Fun">Fun</option>
+      </select>
+      <br /><br />
+      <input name="picture" type="file" />
+      <button type="submit">Upload</button>
+    </form>
+>>>>>>> test_branch_남용
   </body>
 </html>
