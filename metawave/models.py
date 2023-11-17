@@ -139,7 +139,7 @@ class MoodthemePlaylist(models.Model):
 class inputPicture(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     author = models.CharField(max_length=255, blank=True, null=True)
-    picture = models.ImageField(upload_to='pictures/', null=True)
+    picture = models.ImageField('picture_url', upload_to='pictures/', null=True)
     musicGenre = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:

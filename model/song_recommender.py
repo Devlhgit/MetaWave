@@ -46,13 +46,14 @@ def play_random_music_with_theme(music_files_with_themes):
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(10)
 
-# 이미지첨부가되면...->
-# 입력될 이미지의 경로입니다.
-input_img_path = r'C:\Users\GAIS\Desktop\1.jpg'
-result = classify_image(input_img_path)
-# 예측된 무드와 노래의 태깅
-predic_theme = class_labels[result -1]
+if __name__ == '__main__':
+    # 이미지첨부가되면...->
+    # 입력될 이미지의 경로입니다.
+    input_img_path = r'C:\Users\GAIS\Desktop\1.jpg'
+    result = classify_image(input_img_path)
+    # 예측된 무드와 노래의 태깅
+    predic_theme = class_labels[result -1]
 
-# 무작위 음악과 테마 재생
-music_files_with_themes = get_music_files_with_themes(os.path.join(r'c:\Users\GAIS\mtg-jamendo-dataset\classified_music_data', predic_theme))
-play_random_music_with_theme(music_files_with_themes)
+    # 무작위 음악과 테마 재생
+    music_files_with_themes = get_music_files_with_themes(os.path.join(r'c:\Users\GAIS\mtg-jamendo-dataset\classified_music_data', predic_theme))
+    play_random_music_with_theme(music_files_with_themes)
