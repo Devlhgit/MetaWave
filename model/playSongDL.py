@@ -6,19 +6,20 @@ import os
 import pygame
 import random
 
+# 폴더 경로 설정
+input_img_path = r"C:\Users\gjaischool\Desktop\data\imgData96015\images\landscape\0afcc2cc0e0d406a6de89179b0e5ffe6c.jpg"
+folder_path = r'C:\Users\gjaischool\Desktop\MetaWave\MetaWave\model\categorized_images'
+model_path = r'C:\Users\gjaischool\Desktop\MetaWave\MetaWave\model\vgg16_model.h5'
+music_folder_path = r'C:\Users\gjaischool\Desktop\jamendo'
+
+loaded_model = load_model(model_path)
 # 클래스 레이블을 저장할 리스트
 class_labels = []
-
-# 폴더 경로 설정
-folder_path = r'model\categorized_images'
-loaded_model = load_model(r'model\vgg16_model.h5')
 
 # 폴더 내의 모든 하위 폴더를 순회하여 클래스 레이블 생성
 for folder_name in os.listdir(folder_path):
     if os.path.isdir(os.path.join(folder_path, folder_name)):
         class_labels.append(folder_name)
-
-
 
 # 이미지정규화
 def classify_image(img_path):
@@ -50,11 +51,11 @@ def play_random_music_with_theme(music_files_with_themes):
 
 # 이미지첨부가되면...->
 # 입력될 이미지의 경로입니다.
-input_img_path = r'C:\Users\GAIS\Desktop\1.jpg'
+
 result = classify_image(input_img_path)
 # 예측된 무드와 노래의 태깅
 predic_theme = class_labels[result -1]
-# 무작위 음악과 테마 재생
-music_files_with_themes = get_music_files_with_themes(os.path.join(r'c:\Users\GAIS\mtg-jamendo-dataset\classified_music_data', predic_theme))
 
-# play_random_music_with_theme(music_files_with_themes)
+# 무작위 음악과 테마 재생
+music_files_with_themes = get_music_files_with_themes(os.path.join(music_folder_path, predic_theme))
+play_random_music_with_theme(music_files_with_themes)
