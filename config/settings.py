@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
 import os
 from pathlib import Path
 
@@ -76,17 +75,6 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Metawave',
-        'USER': 'root',
-        'PASSWORD': 'mysql',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -119,12 +107,27 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
+# # Static files (CSS, JavaScript, Images)
+# # https://docs.djangoproject.com/en/4.2/howto/static-files/
+
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# 개발 중 정적 파일을 찾을 디렉토리들을 여기에 추가합니다.
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    # 여기에 필요한 추가적인 정적 파일 디렉토리 경로를 추가할 수 있습니다.
+]
+
+# 배포 환경에서 collectstatic 명령이 사용하는 정적 파일 루트 디렉토리
+# 이 디렉토리는 개발 중에는 사용하지 않습니다.
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # 이 경로를 배포용으로 변경합니다.
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")

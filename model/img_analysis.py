@@ -6,13 +6,14 @@ import os
 import pandas as pd
 
 csv_file_path = r"C:\Users\gjaischool\Desktop\MetaWave\MetaWave\model\input_image_analysis_results.csv"  # 결과 CSV 파일 경로 변경 필요
-
+test = ""
 # 이미지 분석을 위한 함수를 정의합니다.
 def analyze_image(image_path):
      # 이미지를 불러와서 RGB로 변환합니다.
     image = Image.open(image_path)
     image = image.convert("RGB")
-
+    global test
+    test = image_path
     # 이미지를 numpy array로 변환합니다.
     image_array = np.array(image)
 
