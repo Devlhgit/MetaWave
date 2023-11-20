@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.db.models import Q
 from .models import inputPicture, MoodthemePlaylist
-from tensorflow.keras.models import load_model
-from model.song_recommender import classify_image, get_music_files_with_themes, play_random_music_with_theme
+from model.playSongML import inputPath
+#from tensorflow.keras.models import load_model
+#from model.song_recommender import classify_image, get_music_files_with_themes, play_random_music_with_theme
 
 import  os
 
@@ -17,13 +18,14 @@ def classify_and_recommend(request, name, author, pictures, musicGenre):
     # 입력 이미지의 경로 생성
     input_img_path = f'C:\\Users\\GAIS\\Documents\\GitHub\\MetaWave\\media\\pictures\\{pictures}'
     print('input_img_path:', input_img_path)
+    inputPath(input_img_path)
     
     # 이미지 분류 수행 및 결과 얻기
-    result = classify_image(input_img_path)
-    predic_theme = class_labels[result - 1]
+    # result = classify_image(input_img_path)
+    # predic_theme = class_labels[result - 1]
 
     # 테마에 따라 음악 파일 가져오기
-    music_files_with_themes = get_music_files_with_themes(os.path.join(r'c:\Users\GAIS\mtg-jamendo-dataset\classified_music_data', predic_theme))
+    # music_files_with_themes = get_music_files_with_themes(os.path.join(r'c:\Users\GAIS\mtg-jamendo-dataset\classified_music_data', predic_theme))
 
     # 선택한 장르와 같은 랜덤한 10개의 플레이리스트 가져오기
     random_playList = MoodthemePlaylist.objects.filter(tags=musicGenre).order_by('?')[:10]
@@ -32,11 +34,11 @@ def classify_and_recommend(request, name, author, pictures, musicGenre):
     picture_instance.save()
 
     # recommend.html 템플릿 렌더링 및 필요한 데이터 전달
-    return render(request, 'recommend.html', {
-        'picture': picture_instance,
-        'random_playList': random_playList,
-        'play_random_music_with_theme': play_random_music_with_theme(music_files_with_themes),
-    })
+    # return render(request, 'recommend.html', {
+    #     'picture': picture_instance,
+    #     'random_playList': random_playList,
+    #     'play_random_music_with_theme': play_random_music_with_theme(music_files_with_themes),
+    # })
 
 
 def mainPage(request):
