@@ -7,10 +7,10 @@ def mainPage(request):
     if request.method == "POST":
         pictures = request.FILES['picture']
 
+        print('picture url :', pictures)
+
         picture_instance = inputPicture(picture=pictures)
         picture_instance.save()
-
-        return render(request, "mainPage.html")
 
 
     return render(request, "mainPage.html")
