@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.db.models import Q
 
 def mainPage(request):
     # 메인 페이지 렌더링 및 POST 요청 처리
@@ -8,5 +7,6 @@ def mainPage(request):
         author = request.POST['author']
         pictures = request.FILES['picture']
         musicGenre = request.POST['musicGenre']
+
 
     return render(request, "mainPage.html")
