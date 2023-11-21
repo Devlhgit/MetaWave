@@ -1,19 +1,13 @@
-import os
-import joblib
-import random
-import pygame
+import os, joblib, random, pygame
 import pandas as pd
+from metawave.views import global_image_path
 from model.img_analysis import analyze_image, analyze_image_to_csv
 
-global_image_path = ""
-RendomFrest_model_path = r"C:\Users\gjaischool\Desktop\MetaWave\MetaWave\model\Recommended_Moodes_Predict.pkl"
-mlb_path = r"C:\Users\gjaischool\Desktop\MetaWave\MetaWave\model\mlb.pkl"
-csv_file_path = r"C:\Users\gjaischool\Desktop\MetaWave\MetaWave\model\input_image_analysis_results.csv"
-music_folder_path = r"C:\Users\gjaischool\Desktop\jamendo"
 
-def inputPath(image_path):
-    global global_image_path
-    global_image_path = image_path
+RendomFrest_model_path = r"C:\Users\GAIS\Documents\GitHub\MetaWave\model\Recommended_Moodes_Predict.pkl"
+mlb_path = r"C:\Users\GAIS\Documents\GitHub\MetaWave\model\mlb.pkl"
+csv_file_path = r"C:\Users\GAIS\Documents\GitHub\MetaWave\model\input_image_analysis_results.csv"
+music_folder_path = r"C:\Users\GAIS\mtg-jamendo-dataset\classified_music_data"
 
 color_ratios = analyze_image(global_image_path)
 analyze_image_to_csv(global_image_path, color_ratios)
