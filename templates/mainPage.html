@@ -184,14 +184,18 @@
     </style>
 </head>
 <body>
-    <div id="music-controls">
-        <button id="play-pause">&#9658;</button>
-        <button id="next-track">&#9654;|</button>
-        <input type="file" id="image-upload" accept="image/*">
-        <label for="image-upload" id="upload-button">image-upload</label>
-        <div class="art-display"></div>
-    </div>
-    <div id="music-theme">테마: 재생되지 않음</div>
+  <div id="music-controls">
+    <form id="upload-form" method="post" enctype="multipart/form-data">
+      {% csrf_token %} {{ form.as_p }}
+      <button id="play-pause">&#9658;</button>
+      <button id="next-track">&#9654;|</button>
+      <input type="file" id="image-upload" accept="image/*" name="image">
+      <input name="picture" type="file" id="upload-button"/>
+      <button type="submit" id="upload-button">이미지 업로드</button>
+      <div class="art-display"></div>
+    </form>
+  </div>
+  <div id="music-theme">테마: 재생되지 않음</div>
     <!-- 오선지와 음표 애니메이션 -->
     
     <svg position: absolute; top: 50px; right: 50px; width: 350px;  z-index: 10; >

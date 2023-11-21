@@ -5,7 +5,7 @@ import  os
 
 
 # 이미지 분류 및 음악 추천을 수행하는 함수
-def classify_and_recommend(request, name, author, pictures, musicGenre):
+def classify_and_recommend(request, pictures):
 
     # 이미지 분류를 위한 설정
     folder_path = r'C:\Users\GAIS\Documents\GitHub\MetaWave\model\categorized_images'
@@ -23,10 +23,7 @@ def classify_and_recommend(request, name, author, pictures, musicGenre):
     # 테마에 따라 음악 파일 가져오기
     # music_files_with_themes = get_music_files_with_themes(os.path.join(r'c:\Users\GAIS\mtg-jamendo-dataset\classified_music_data', predic_theme))
 
-    # 선택한 장르와 같은 랜덤한 10개의 플레이리스트 가져오기
-    random_playList = MoodthemePlaylist.objects.filter(tags=musicGenre).order_by('?')[:10]
-
-    picture_instance = inputPicture(name=name, author=author, picture=pictures, musicGenre=musicGenre)
+    picture_instance = inputPicture(picture=pictures)
     picture_instance.save()
 
     # recommend.html 템플릿 렌더링 및 필요한 데이터 전달
@@ -41,17 +38,15 @@ def mainPage(request):
     # 메인 페이지 렌더링 및 POST 요청 처리
 
     if request.method == "POST":
-        # POST 요청이 들어오면 폼 데이터를 추출하여 classify_and_recommend 함수 호출
-        name = request.POST['name']
-        author = request.POST['author']
+        print("POST 요청 받음")
+
         pictures = request.FILES['picture']
-        musicGenre = request.POST['musicGenre']
 
         # 데이터베이스에 이미지 정보 저장
-        picture_instance = inputPicture(name=name, author=author, picture=pictures, musicGenre=musicGenre)
+        picture_instance = inputPicture(picture=pictures)
         picture_instance.save()
 
-        return classify_and_recommend(request, name, author, pictures, musicGenre)
+        return classify_and_recommend(request, pictures)
 
     # GET 요청일 경우 mainPage.html 템플릿 렌더링
     return render(request, "mainPage.html")

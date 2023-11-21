@@ -7,7 +7,7 @@ from django.utils.safestring import mark_safe
 
 @admin.register(inputPicture)
 class Admin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'author', 'display_picture']
+    list_display = ['id', 'display_picture']
 
     def display_picture(self, obj): # MySQL BLOB 데이터 이미지 객체로 변환
         image_data_base64 = base64.b64encode(obj.picture).decode('utf-8')
