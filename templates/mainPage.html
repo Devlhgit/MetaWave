@@ -4,177 +4,193 @@
 <head>
     <meta charset="UTF-8">
     <title>메타버스 그림전시관</title>
+    <link rel="stylesheet" href="{% static 'css\mainPage.css' %}">
     <style>
         body {
-          max-height: 100vh; /* 뷰포트 높이의 100% */
-    overflow-y: auto; /* 필요할 때 세로 스크롤바 표시 */
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #c0ffb3;
-            background-image: url('{% static "images/preview.jpg" %}'); /* 정적 파일 경로 사용 */
-            background-size: cover; /* 이미지가 화면을 전부 커버하도록 설정 */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed; /* 이미지를 고정 */
-            
-        }
-        #music-controls {
-                        margin-top: 20px;
-                        }
-                        #image-upload {
-            display: none; /* 초기에 숨겨진 상태 */
-        }
+  max-height: 100vh; /* 뷰포트 높이의 100% */
+  overflow-y: auto; /* 필요할 때 세로 스크롤바 표시 */
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #c0ffb3;
+  background-image: url('{% static "images/preview.jpg" %}'); /* 정적 파일 경로 사용 */
+  background-size: cover; /* 이미지가 화면을 전부 커버하도록 설정 */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* 이미지를 고정 */
+}
 
-        #upload-button {
-            font-size: 16px;
-            padding: 10px 20px;
-            border: 2px solid rgb(255, 255, 255);
-    background-color: #030000;
-    color: #eeff00;
-            cursor: pointer;
-            border: none;
-            outline: none;
-            border-radius: 5px;
-        }
+#music-controls {
+  margin-top: 20px;
+}
+#image-upload {
+  display: none; /* 초기에 숨겨진 상태 */
+}
 
-        #upload-button:hover {
-          background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-        #upload-button:active {
-          background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
+#upload-button {
+  font-size: 16px;
+  padding: 10px 20px;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: #030000;
+  color: #eeff00;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+#upload-button:hover {
+  background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+#upload-button:active {
+  background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 
 #play-pause {
-    font-size: 16px;
-    padding: 15px;
-    border-radius: 50%;
-    border: 2px solid rgb(255, 255, 255);
-    background-color: #030000;
-    color: #eeff00;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            }
-
-
+  font-size: 16px;
+  padding: 15px;
+  border-radius: 50%;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: #030000;
+  color: #eeff00;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
 #play-pause:hover {
-    background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 #play-pause:active {
-    transform: none;
-    box-shadow: 0 2px 4px rgba(66, 59, 59, 0.2);
+  transform: none;
+  box-shadow: 0 2px 4px rgba(66, 59, 59, 0.2);
 }
 
 #next-track {
-    /* 재생/일시정지 버튼 스타일과 동일 */
-    font-size: 16px;
-    padding: 15px;
-    border-radius: 50%;
-    border: 2px solid #ffffff;
-    background-color: #000000;
-    color: rgb(234, 255, 0);
-    cursor: pointer;
-    outline: none;
-    transition: all 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* 재생/일시정지 버튼 스타일과 동일 */
+  font-size: 16px;
+  padding: 15px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  background-color: #000000;
+  color: rgb(234, 255, 0);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #next-track:hover {
-    background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 #next-track:active {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #music-theme {
-    margin-top: 20px;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
+  margin-top: 20px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
 }
 
 .music-staff {
-    position: relative;
-    width: 100%;
-    height: 100px; /* 오선지 높이 */
-    overflow: visible; /* 경계를 넘어가는 부분을 숨깁니다 */
+  position: relative;
+  width: 100%;
+  height: 100px; /* 오선지 높이 */
+  overflow: visible; /* 경계를 넘어가는 부분을 숨깁니다 */
 }
 
 .art-display {
-            border: 3px solid #333; /* 테두리 */
-            padding: 10px; /* 내부 여백 */
-            margin-top: 20px; /* 상단 여백 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-            border-radius: 15px; /* 부드러운 모서리 */
-            background-color: white; /* 배경색 */
-            max-width: 500px; /* 최대 너비 */
-            max-height: 500px; /* 최대 높이 */
-            overflow: hidden; /* 넘치는 이미지 숨김 */
-        }
+  border: 3px solid #333; /* 테두리 */
+  padding: 10px; /* 내부 여백 */
+  margin-top: 20px; /* 상단 여백 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  border-radius: 15px; /* 부드러운 모서리 */
+  background-color: white; /* 배경색 */
+  max-width: 500px; /* 최대 너비 */
+  max-height: 500px; /* 최대 높이 */
+  overflow: hidden; /* 넘치는 이미지 숨김 */
+}
 
-        .art-display img {
-            width: 100%; /* 너비 맞춤 */
-            height: auto; /* 비율 유지 */
-            border-radius: 10px; /* 이미지 모서리 부드럽게 */
-        }
+.art-display img {
+  width: 100%; /* 너비 맞춤 */
+  height: auto; /* 비율 유지 */
+  border-radius: 10px; /* 이미지 모서리 부드럽게 */
+}
 
 @keyframes rotate-clockwise {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes rotate-anticlockwise {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(-360deg); }
-        }
-        @keyframes rotate-stop {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(0deg); }
-        }
-
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate-anticlockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes rotate-stop {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
 
 @keyframes moveNote {
-  0% { transform: translateX(0) translateY(0); opacity: 1; }
-    100% { transform: translateX(330px) translateY(-100px); opacity: 0; }
-    }
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(330px) translateY(-100px);
+    opacity: 0;
+  }
+}
 
-    .note {
-            font-size: 40px;
-            position: absolute;
-            animation: moveNote 5s linear forwards;
-        }
+.note {
+  font-size: 40px;
+  position: absolute;
+  animation: moveNote 5s linear forwards;
+}
 
     </style>
 </head>
 <body>
-  <div id="music-controls">
-    <button id="play-pause">&#9658;</button>
-    <button id="next-track">&#9654;|</button>
-    <input type="file" id="image-upload" accept="image/*">
-    <label for="image-upload" id="upload-button">image-upload</label>
-    <div class="art-display"></div>
-</div>
+    <div id="music-controls">
+        <button id="play-pause">&#9658;</button>
+        <button id="next-track">&#9654;|</button>
+        <input type="file" id="image-upload" accept="image/*">
+        <label for="image-upload" id="upload-button">image-upload</label>
+        <div class="art-display"></div>
+    </div>
     <div id="music-theme">테마: 재생되지 않음</div>
     <!-- 오선지와 음표 애니메이션 -->
     
@@ -230,7 +246,7 @@
         const svg = document.querySelector('svg');
         const newNote = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         newNote.classList.add('note');
-        newNote.innerHTML = notes[currentNote];
+        newNote.innerHTML = notes[currentNote]; 
         newNote.setAttribute('x', '0');
         newNote.setAttribute('y', '100'); // 오선지의 중앙 y 좌표
          // 랜덤 색상 생성

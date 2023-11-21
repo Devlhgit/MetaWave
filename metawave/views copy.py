@@ -1,9 +1,5 @@
 from django.shortcuts import render
-from django.db.models import Q
 from .models import inputPicture, MoodthemePlaylist
-# from model.playSongML_rollback import inputPath
-#from tensorflow.keras.models import load_model
-#from model.song_recommender import classify_image, get_music_files_with_themes, play_random_music_with_theme
 
 import  os
 
@@ -61,47 +57,6 @@ def mainPage(request):
     return render(request, "mainPage.html")
 
 
-
-
-# def mainPage(request):
-#     if request.method == "POST":
-#         name = request.POST['name']
-#         author = request.POST['author']
-#         pictures = request.FILES['picture']
-#         musicGenre = request.POST['musicGenre']
-
-#         picture_instance = inputPicture(name=name, author=author, picture=pictures, musicGenre=musicGenre)
-#         picture_instance.save()
-
-#         # 선택한 장르와 같은 랜덤한 10개의 PlayList 출력
-#         random_playList = MoodthemePlaylist.objects.filter(Q(tags=musicGenre) | Q(tags=musicGenre)).order_by('?')[:10]
-
-#         # songrecommender
-#         folder_path = r'C:\Users\GAIS\Documents\GitHub\MetaWave\model\categorized_images' # 폴더 경로 설정
-
-#         # 폴더 내의 모든 하위 폴더를 순회하여 클래스 레이블 생성
-#         class_labels = [] # 클래스 레이블을 저장할 리스트
-#         for folder_name in os.listdir(folder_path):
-#             if os.path.isdir(os.path.join(folder_path, folder_name)):
-#                 class_labels.append(folder_name)
-
-#         input_img_path = r'C:\Users\GAIS\Documents\GitHub\MetaWave/media/pictures/'+str(pictures) # Input 받은 사진의 경로
-
-#         result = classify_image(input_img_path) # 이미지 정규화
-
-#         predic_theme = class_labels[result -1]  # 예측된 무드와 노래의 태깅
-#         print('predic_theme:', predic_theme)
-
-#         # 무작위 음악과 테마 재생
-#         music_files_with_themes = get_music_files_with_themes(os.path.join(r'c:\Users\GAIS\mtg-jamendo-dataset\classified_music_data', predic_theme))
-
-#         return render(request, 'recommend.html', 
-#                       {'picture' : picture_instance, 
-#                        'random_playList' : random_playList,
-#                         'play_random_music_with_theme' : play_random_music_with_theme(music_files_with_themes)})
-
-    
-#     return render(request, "mainPage.html")
 
 
 
