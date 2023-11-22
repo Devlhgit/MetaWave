@@ -1,236 +1,319 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
     <title>메타버스 그림전시관</title>
-    <link rel="stylesheet" href="{% static 'css\mainPage.css' %}" />
+    <link rel="stylesheet" href="{% static 'css\mainPage.css' %}">
     <style>
-      body {
-        max-height: 100vh; /* 뷰포트 높이의 100% */
-        overflow-y: auto; /* 필요할 때 세로 스크롤바 표시 */
-        font-family: "Arial", sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: #f5fdad;
-        background-image: url('{% static "images/preview.jpg" %}'); /* 정적 파일 경로 사용 */
-        background-size: cover; /* 이미지가 화면을 전부 커버하도록 설정 */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed; /* 이미지를 고정 */
-      }
+        body {
+  max-height: 100vh; /* 뷰포트 높이의 100% */
+  overflow-y: auto; /* 필요할 때 세로 스크롤바 표시 */
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5fdad;
+  background-image: url('{% static "images/preview.jpg" %}'); /* 정적 파일 경로 사용 */
+  background-size: cover; /* 이미지가 화면을 전부 커버하도록 설정 */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* 이미지를 고정 */
+}
 
-      #music-controls {
-        margin-top: 20px;
-      }
-      #image-upload {
-        display: none; /* 초기에 숨겨진 상태 */
-      }
+#music-controls {
+  margin-top: 20px;
+}
+#image-upload {
+  display: none; /* 초기에 숨겨진 상태 */
+}
 
-      #upload-button {
-        font-size: 16px;
-        padding: 10px 20px;
-        border: 2px solid rgb(255, 255, 255);
-        background-color: #030000;
-        color: #eeff00;
-        cursor: pointer;
-        border: none;
-        outline: none;
-        border-radius: 5px;
-      }
+#upload-button {
+  font-size: 16px;
+  padding: 10px 20px;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: #030000;
+  color: #eeff00;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
 
-      #upload-button:hover {
-        background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
-        color: #fff;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      }
-      #upload-button:active {
-        background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
-        color: #fff;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      }
+#upload-button:hover {
+  background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+#upload-button:active {
+  background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 
-      #play-pause {
-        font-size: 16px;
-        padding: 15px;
-        border-radius: 50%;
-        border: 2px solid rgb(255, 255, 255);
-        background-color: #030000;
-        color: #eeff00;
-        cursor: pointer;
-        outline: none;
-        transition: all 0.3s;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      }
+#play-pause {
+  font-size: 16px;
+  padding: 15px;
+  border-radius: 50%;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: #030000;
+  color: #eeff00;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-      #play-pause:hover {
-        background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
-        color: #fff;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      }
+#play-pause:hover {
+  background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 
-      #play-pause:active {
-        transform: none;
-        box-shadow: 0 2px 4px rgba(66, 59, 59, 0.2);
-      }
+#play-pause:active {
+  transform: none;
+  box-shadow: 0 2px 4px rgba(66, 59, 59, 0.2);
+}
 
-      #next-track {
-        /* 재생/일시정지 버튼 스타일과 동일 */
-        font-size: 16px;
-        padding: 15px;
-        border-radius: 50%;
-        border: 2px solid #ffffff;
-        background-color: #000000;
-        color: rgb(234, 255, 0);
-        cursor: pointer;
-        outline: none;
-        transition: all 0.3s;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      }
+#next-track {
+  /* 재생/일시정지 버튼 스타일과 동일 */
+  font-size: 16px;
+  padding: 15px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  background-color: #000000;
+  color: rgb(234, 255, 0);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-      #next-track:hover {
-        background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
-        color: #fff;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      }
+#next-track:hover {
+  background: linear-gradient(135deg, rgba(137, 102, 53, 0.439), rgba(185, 5, 5, 0.439));
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 
-      #next-track:active {
-        transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      }
+#next-track:active {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-      #music-theme {
-        margin-top: 20px;
-        font-size: 1.5em;
-        font-weight: bold;
-        color: #333;
-        text-align: center;
-      }
+#music-theme {
+  margin-top: 20px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
 
-      .music-staff {
-        position: relative;
-        width: 100%;
-        height: 100px; /* 오선지 높이 */
-        overflow: visible; /* 경계를 넘어가는 부분을 숨깁니다 */
-      }
+.music-staff {
+  position: relative;
+  width: 100%;
+  height: 100px; /* 오선지 높이 */
+  overflow: visible; /* 경계를 넘어가는 부분을 숨깁니다 */
+}
 
-      .art-display {
-        border: 3px solid #333; /* 테두리 */
-        padding: 10px; /* 내부 여백 */
-        margin-top: 20px; /* 상단 여백 */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-        border-radius: 15px; /* 부드러운 모서리 */
-        background-color: white; /* 배경색 */
-        max-width: 500px; /* 최대 너비 */
-        max-height: 500px; /* 최대 높이 */
-        overflow: hidden; /* 넘치는 이미지 숨김 */
-      }
+.art-display {
+  border: 3px solid #333; /* 테두리 */
+  padding: 10px; /* 내부 여백 */
+  margin-top: 20px; /* 상단 여백 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  border-radius: 15px; /* 부드러운 모서리 */
+  background-color: white; /* 배경색 */
+  max-width: 500px; /* 최대 너비 */
+  max-height: 500px; /* 최대 높이 */
+  overflow: hidden; /* 넘치는 이미지 숨김 */
+}
 
-      .art-display img {
-        width: 100%; /* 너비 맞춤 */
-        height: auto; /* 비율 유지 */
-        border-radius: 10px; /* 이미지 모서리 부드럽게 */
-      }
+.art-display img {
+  width: 100%; /* 너비 맞춤 */
+  height: auto; /* 비율 유지 */
+  border-radius: 10px; /* 이미지 모서리 부드럽게 */
+}
 
-      @keyframes rotate-clockwise {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      @keyframes rotate-anticlockwise {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(-360deg);
-        }
-      }
-      @keyframes rotate-stop {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(0deg);
-        }
-      }
+@keyframes rotate-clockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate-anticlockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes rotate-stop {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
 
-      @keyframes moveNote {
-        0% {
-          transform: translateX(0) translateY(0);
-          opacity: 1;
-        }
-        100% {
-          transform: translateX(330px) translateY(-100px);
-          opacity: 0;
-        }
-      }
+@keyframes moveNote {
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(330px) translateY(-100px);
+    opacity: 0;
+  }
+}
 
-      .note {
-        font-size: 40px;
-        position: absolute;
-        animation: moveNote 5s linear forwards;
-      }
+.note {
+  font-size: 40px;
+  position: absolute;
+  animation: moveNote 5s linear forwards;
+}
+
     </style>
-  </head>
-  <body>
-    <div id="music-controls">
-      <form id="upload-form" method="POST" enctype="multipart/form-data">
-        {% csrf_token %} {{ form.as_p }}
-        <button id="play-pause">&#9658;</button>
-        <button id="next-track">&#9654;|</button>
-        <input type="file" id="image-upload" accept="image/*" name="image" />
-        <input name="picture" type="file" id="upload-button" />
-        <button type="submit" id="upload-button">이미지 업로드</button>
-        <div class="art-display"></div>
-      </form>
-    </div>
+</head>
+<body>
+  <div id="music-controls">
+    <form id="upload-form" method="POST" enctype="multipart/form-data">
+      {% csrf_token %} {{ form.as_p }}
+      <button id="play-pause">&#9658;</button>
+      <button id="next-track">&#9654;|</button>
+      <input type="file" id="image-upload" accept="image/*" name="image">
+      <input name="picture" type="file" id="upload-button"/>
+      <button type="submit" id="upload-button">이미지 업로드</button>
+      <div class="art-display"></div>
+    </form>
+  </div>
+  <div id="music-theme">테마: 재생되지 않음</div>
+    <!-- 오선지와 음표 애니메이션 -->
+    
+    <svg position: absolute; top: 50px; right: 50px; width: 350px;  z-index: 10; >
+      <g transform="rotate(-20, 200, 50)"> <!-- 회전 변환 적용 -->
+        <path id="line1" fill="none" stroke="black" stroke-width="4" d="M0,10 Q50,25 100,10 T200,10 T300,10" />
+        <path id="line2" fill="none" stroke="black" stroke-width="4" d="M0,20 Q50,35 100,20 T200,20 T300,20" />
+        <path id="line3" fill="none" stroke="black" stroke-width="4" d="M0,30 Q50,45 100,30 T200,30 T300,30" />
+        <path id="line4" fill="none" stroke="black" stroke-width="4" d="M0,40 Q50,55 100,40 T200,40 T300,40" />
+        <path id="line5" fill="none" stroke="black" stroke-width="4" d="M0,50 Q50,65 100,50 T200,50 T300,50" />
+        
+        <!-- 시작 부분 막대 -->
+        <line x1="0" y1="10" x2="0" y2="52" stroke="black" stroke-width="4" />
+        
+        <!-- 낮음 음표 구현 -->
+        <image x="-15" y="-20" width="80" height="100" href="static\images\Treble_Clef.png" />
+  </svg>
 
-    <div id="music-theme">테마: 재생되지 않음</div>
+  <script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var isPlaying = false;
-        var audio = new Audio(); // Audio 객체 생성
+    const notes = [
+        '&#9835;', '&#9836;', '&#9834;', '&#9837;', '&#9838;', '&#9839;',
+        '&#119070;', '&#119074;', '&#9833;', '&#9834;', '&#9835;', '&#9836;',
+        '&#9837;', '&#9838;', '&#9839;', '&#119081;', '&#119082;', '&#119083;',
+        '&#119084;', '&#119085;', '&#119086;', '&#119087;', '&#119088;', '&#119089;',
+        '&#119133;', '&#119134;',
+    ];
 
-        // 재생/일시정지 버튼 클릭 이벤트 처리
-        document.getElementById("play-pause").addEventListener("click", function () {
-          if (isPlaying) {
-            // 음악이 재생 중이면 일시정지
-            audio.pause();
-            isPlaying = false;
-            this.innerHTML = "&#9658;"; // 일시정지 아이콘
-          } else {
-            // 음악이 일시정지 중이면 재생
-            audio.play();
-            isPlaying = true;
-            this.innerHTML = "&#9646;&#9646;"; // 재생 아이콘
+    const imageUpload = document.getElementById('image-upload');
+    const playPauseBtn = document.getElementById('play-pause');
+
+    let isPlaying = false;
+    let isRotating = false;
+    let currentNote = 0;
+
+    const topY = 90; // 오선지 상단 y 좌표
+    const bottomY = 110; // 오선지 하단 y 좌표
+
+
+    function rotateImage(direction) {
+      const uploadedImage = document.getElementById('uploaded-image');
+      if (uploadedImage) {
+          if (direction === 'stop') {
+            uploadedImage.style.animation = 'none';
+          } 
+          else {
+            uploadedImage.style.animation = `rotate-${direction} 2s linear infinite`;
           }
+      }
+    }
+
+    function createNote() {
+        const svg = document.querySelector('svg');
+        const newNote = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        newNote.classList.add('note');
+        newNote.innerHTML = notes[currentNote]; 
+        newNote.setAttribute('x', '0');
+        newNote.setAttribute('y', '100'); // 오선지의 중앙 y 좌표
+         // 랜덤 색상 생성
+        const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+        newNote.style.fill = randomColor; // 생성된 색상을 음표에 적용
+
+        svg.appendChild(newNote);
+
+        currentNote = (currentNote + 1) % notes.length;
+
+        if (isPlaying) {
+        setTimeout(createNote, 2000);
+        }
+    }
+
+    function toggleNotesAnimation(state) {
+        document.querySelectorAll('.note').forEach(el => {
+            el.style.animationPlayState = state;
         });
+    }
 
-        // // 여기에 음악 파일 경로를 설정하십시오.
-        // var musicFilePath = "your_music_file.mp3";
+    playPauseBtn.addEventListener('click', function() {
+        isPlaying = !isPlaying; // 재생 상태를 토글
+        isRotating = isPlaying; // 회전 상태도 재생 상태에 맞춤
 
-        // // 음악 로딩 및 재생 설정
-        // audio.src = musicFilePath;
-        audio.loop = true; // 반복 재생 설정
-        audio.load(); // 음악 로딩
+        if (isPlaying) {
+            this.innerHTML = '⏸️';
+            rotateImage('clockwise');
+            toggleNotesAnimation('running');
+            createNote();
+        } else {
+            this.innerHTML = '▶️';
+            rotateImage('stop');
+            toggleNotesAnimation('paused');
+        }
+    });
 
-        // 음악이 끝나면 다시 재생
-        audio.addEventListener("ended", function () {
-          audio.currentTime = 0;
-          audio.play();
-        });
-      });
-    </script>
-  </body>
+    imageUpload.addEventListener('change', function (event) {
+      if (event.target.files && event.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            let uploadedImage = document.getElementById('uploaded-image');
+            if (!uploadedImage) {
+                uploadedImage = document.createElement('img');
+                uploadedImage.id = 'uploaded-image';
+                uploadedImage.style.borderRadius = '50%';
+                uploadedImage.style.width = '300px';
+                uploadedImage.style.height = '300px';
+                uploadedImage.style.objectFit = 'cover';
+                uploadedImage.style.animation = 'rotate-anticlockwise 2s linear';
+                document.body.appendChild(uploadedImage);
+            }
+            uploadedImage.src = e.target.result;
+
+            const displayArea = document.querySelector('.art-display');
+            displayArea.innerHTML = ''; // 기존 이미지 제거
+            const newImage = document.createElement('img');
+            newImage.src = e.target.result;
+            displayArea.appendChild(newImage); // 새 이미지 추가
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    });
+</script>
+</body>
 </html>

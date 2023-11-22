@@ -1,6 +1,5 @@
 import os, joblib, random, pygame
 import pandas as pd
-<<<<<<< HEAD
 from img_analysis import analyze_image, analyze_image_to_csv
 
 
@@ -10,16 +9,6 @@ mlb_path = r"C:\Users\gjaischool\Desktop\MetaWave\MetaWave\model\mlb.pkl"
 csv_file_path = r"C:\Users\gjaischool\Desktop\MetaWave\MetaWave\model\input_image_analysis_results.csv"
 music_folder_path = r"C:\Users\gjaischool\Desktop\jamendo"
 
-=======
-from metawave.views import global_image_path
-from model.img_analysis import analyze_image, analyze_image_to_csv
-
-
-RendomFrest_model_path = r"C:\Users\GAIS\Documents\GitHub\MetaWave\model\Recommended_Moodes_Predict.pkl"
-mlb_path = r"C:\Users\GAIS\Documents\GitHub\MetaWave\model\mlb.pkl"
-csv_file_path = r"C:\Users\GAIS\Documents\GitHub\MetaWave\model\input_image_analysis_results.csv"
-music_folder_path = r"C:\Users\GAIS\mtg-jamendo-dataset\classified_music_data"
->>>>>>> 061554d583963839197ee0980db7036943708eb9
 
 color_ratios = analyze_image(global_image_path)
 analyze_image_to_csv(global_image_path, color_ratios)
