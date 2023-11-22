@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import inputPicture
+from .models import Picture
 import os, joblib, random, pygame
 import pandas as pd
 from model.img_analysis import analyze_image, analyze_image_to_csv
@@ -23,7 +23,7 @@ def mainPage(request):
 def handle_uploaded_picture(picture):
     global global_image_path
     global_image_path = f'C:\\Users\\GAIS\\Documents\\GitHub\\MetaWave\\media\\pictures\\{picture}'
-    picture_instance = inputPicture(picture=picture)
+    picture_instance = Picture(picture=picture)
     picture_instance.save()
 
 # 이미지 분석 및 음악 재생 함수
