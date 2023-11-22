@@ -314,6 +314,18 @@
         reader.readAsDataURL(event.target.files[0]);
       }
     });
+
+    playPauseBtn.addEventListener('click', () => {
+        if (isPlaying) {
+            pygame.mixer.music.pause();
+            isPlaying = false;
+            playPauseBtn.innerHTML = '&#9658;';
+        } else {
+            pygame.mixer.music.unpause();
+            isPlaying = true;
+            playPauseBtn.innerHTML = '||';
+        }
+    });
 </script>
 </body>
 </html>
