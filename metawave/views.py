@@ -14,18 +14,15 @@ music_folder_path = r"C:\Users\GAIS\mtg-jamendo-dataset\classified_music_data"
 # 웹 페이지의 메인 페이지 처리 함수
 def mainPage(request):
     if request.method == "POST":
-        pictures = request.FILES['picture']
-        
-
-        # 전역변수 선언
-        global global_image_path
-        global_image_path = f'C:\\Users\\GAIS\\Documents\\GitHub\\MetaWave\\media\\pictures\\{pictures}'
-
+        pictures = request.FILES['picture']        
 
         # 이미지데이터 저장
         picture_instance = inputPicture(picture=pictures)
         picture_instance.save()
 
+        # 전역변수 선언
+        global global_image_path
+        global_image_path = f'C:\\Users\\GAIS\\Documents\\GitHub\\MetaWave\\media\\pictures\\{pictures}'
 
         # 이미지 분석 및 음악 재생 함수 호출
         analyze_and_play_music()

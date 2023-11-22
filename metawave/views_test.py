@@ -10,13 +10,11 @@ mlb_path = r"C:\Users\GAIS\Documents\GitHub\MetaWave\model\mlb.pkl"
 csv_file_path = r"C:\Users\GAIS\Documents\GitHub\MetaWave\model\input_image_analysis_results.csv"
 music_folder_path = r"C:\Users\GAIS\mtg-jamendo-dataset\classified_music_data"
 
-# 전역 변수
-global_image_path = None
-
 
 def mainPage(request):
     if request.method == "POST":
-        handle_uploaded_picture(request.FILES['picture'])
+        pictures = request.FILES['picture']
+        handle_uploaded_picture(pictures)
         analyze_and_play_music()
 
     return render(request, "mainPage.html")
