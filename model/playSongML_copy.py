@@ -1,26 +1,26 @@
 import os
-import joblib
+from joblib import load
 import random
 import pygame
 import pandas as pd
-from img_analysis import analyze_image, analyze_image_to_csv
+from img_analysis import Analyze_Image, Analyze_Image_To_CSV
 
 
-
-RendomFrest_model_path = r"C:\Users\gjaischool\Desktop\MetaWave\MetaWave\model\Recommended_Moodes_Predict.pkl"
-mlb_path = r"C:\Users\gjaischool\Desktop\MetaWave\MetaWave\model\mlb.pkl"
-csv_file_path = r"C:\Users\gjaischool\Desktop\MetaWave\MetaWave\model\input_image_analysis_results.csv"
+global_image_path = r"C:\Users\gjaischool\Desktop\MetaWave\MetaWave\0002f2cf17af385463fb58630c88bdbcc.jpg"
+RendomFrest_model_path = r"model\model.pkl"
+mlb_path = r"model\mlb.pkl"
+csv_file_path = r"model\input_image_analysis_results.csv"
 music_folder_path = r"C:\Users\gjaischool\Desktop\jamendo"
 
 
-color_ratios = analyze_image(global_image_path)
-analyze_image_to_csv(global_image_path, color_ratios)
+color_ratios = Analyze_Image(global_image_path)
+Analyze_Image_To_CSV(global_image_path, color_ratios)
 
 # 모델 로드
-RendomFrest_model = joblib.load(RendomFrest_model_path)
+RendomFrest_model = load(RendomFrest_model_path)
 
 # mlb 객체 로드
-mlb = joblib.load(mlb_path)
+mlb = load(mlb_path)
 
 data_df = pd.read_csv(csv_file_path)
 

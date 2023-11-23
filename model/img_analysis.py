@@ -8,7 +8,7 @@ import pandas as pd
 csv_file_path = r"model\input_image_analysis_results.csv"  # 결과 CSV 파일 경로 변경 필요
 test = ""
 # 이미지 분석을 위한 함수를 정의합니다.
-def analyze_image(image_path):
+def Analyze_Image(image_path):
      # 이미지를 불러와서 RGB로 변환합니다.
     image = Image.open(image_path)
     image = image.convert("RGB")
@@ -97,7 +97,7 @@ def analyze_colors(image_array):
     
     return color_ratios
 
-def analyze_image_to_csv(image_path, color_ratios):
+def Analyze_Image_To_CSV(image_path, color_ratios):
     image_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp']
 
     if os.path.splitext(image_path)[1].lower() in image_extensions:
@@ -115,7 +115,7 @@ def analyze_image_to_csv(image_path, color_ratios):
             writer.writeheader()
 
             # 이미지 분석
-            color_ratios = analyze_image(image_path)
+            color_ratios = Analyze_Image(image_path)
             
             # CSV 파일에 결과를 기록하기 위해 새로운 row 생성
             row = {

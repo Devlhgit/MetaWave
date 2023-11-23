@@ -72,12 +72,25 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 
+<<<<<<< HEAD
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / "db.sqlite3",
     }
 }
+=======
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'Metawave',
+#         'USER': 'root',
+#         'PASSWORD': 'mysql',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
+>>>>>>> H
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

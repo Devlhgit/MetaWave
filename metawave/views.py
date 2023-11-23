@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from model.img_analysis import analyze_image, analyze_image_to_csv
 from django.shortcuts import render
 from .models import Picture
@@ -5,6 +6,10 @@ from joblib import load
 import os, random, pygame
 import pandas as pd
 import pdb
+=======
+from django.shortcuts import render
+from model.img_analysis import Analyze_Image, Analyze_Image_To_CSV
+>>>>>>> H
 
 
 
@@ -17,6 +22,7 @@ music_folder_path = r"C:\Users\gjaischool\Desktop\jamendo"
 
 # 웹 페이지의 메인 페이지 처리 함수
 def mainPage(request):
+<<<<<<< HEAD
     #pdb.set_trace()
     if request.method == 'POST':
         action = request.POST.get('action')
@@ -113,3 +119,14 @@ def get_music_files_for_mood(mood):
         return []
     
 
+=======
+    # 메인 페이지 렌더링 및 POST 요청 처리
+    if request.method == "POST":
+        pictures = request.FILES['picture']
+        input_image_path = f'C:\\Users\\GAIS\\Documents\\GitHub\\MetaWave\\media\\pictures\\{pictures}'
+
+        color_ratios = Analyze_Image(input_image_path)
+        Analyze_Image_To_CSV(input_image_path, color_ratios)
+
+    return render(request, "mainPage.html")
+>>>>>>> H
