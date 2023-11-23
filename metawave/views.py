@@ -1,4 +1,4 @@
-from ..model.img_analysis import analyze_image, analyze_image_to_csv
+from ..model.img_analysis import Analyze_Image, Analyze_Image_To_CSV
 from django.shortcuts import render
 from .models import Picture
 from joblib import load
@@ -36,7 +36,7 @@ def mainPage(request):
             # 이전 곡
             handle_previous()
 
-    return render(request, "mainPage_copy.html")
+    return render(request, "mainPage.html")
 
 def handle_pause():
     # 음악 일시정지 로직 (실제 구현 필요)
@@ -84,8 +84,8 @@ def play_music(mood_list):
         print("No music files found for the given moods.")
 
 def analyze_image_and_predict_mood(image_path):
-    color_ratios = analyze_image(image_path)
-    analyze_image_to_csv(image_path, color_ratios)
+    color_ratios = Analyze_Image(image_path)
+    Analyze_Image_To_CSV(image_path, color_ratios)
     
     try:
         RendomFrest_model = load(RendomFrest_model_path)

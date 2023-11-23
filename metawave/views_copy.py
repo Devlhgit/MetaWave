@@ -3,7 +3,7 @@ from .models import Picture
 import os, random, pygame
 import pandas as pd
 from joblib import load
-from model.img_analysis import analyze_image, analyze_image_to_csv
+from model.img_analysis import Analyze_Image, Analyze_Image_To_CSV
 import pdb
 
 # 모델 및 데이터 파일의 경로 설정
@@ -41,8 +41,8 @@ def get_music_files_for_mood(mood):
 # 이미지 분석 및 음악 재생 함수
 def analyze_and_play_music():
     # 이미지 분석을 통한 색상 비율 계산
-    color_ratios = analyze_image(global_image_path)
-    analyze_image_to_csv(global_image_path, color_ratios)
+    color_ratios = Analyze_Image(global_image_path)
+    Analyze_Image_To_CSV(global_image_path, color_ratios)
     # 머신러닝 모델 로드
     RendomFrest_model = load(RendomFrest_model_path)
     # mlb 객체 로드

@@ -18,9 +18,9 @@ def Analyze_Image(image_path):
     image_array = np.array(image)
 
     # 색상 분석 로직
-    return analyze_colors(image_array)
+    return Analyze_colors(image_array)
 
-def analyze_colors(image_array):
+def Analyze_colors(image_array):
 
     color_counters = {
         "Dark": 0, "Mid": 0, "Bright": 0,
