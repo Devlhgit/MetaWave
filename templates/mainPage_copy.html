@@ -187,12 +187,11 @@
   <div id="music-controls">
     <form id="upload-form" method="POST" enctype="multipart/form-data">
       {% csrf_token %} {{ form.as_p }}
-      <button id="previous" type="submit" name="action" value="previous">previous</button>
-      <button id="play-pause" type="submit" name="action" value="play" >&#9658;</button>
-      <button id="next-track" type="submit" name="action" value="next">&#9654;|</button>
+      <button id="play-pause">&#9658;</button>
+      <button id="next-track">&#9654;|</button>
       <input type="file" id="image-upload" accept="image/*" name="image">
       <input name="picture" type="file" id="upload-button"/>
-      <button id="upload-button" type="submit" name="action" value="upload">Upload</button>
+      <button type="submit" id="upload-button">이미지 업로드</button>
       <div class="art-display"></div>
     </form>
   </div>
@@ -225,14 +224,15 @@
     ];
 
     const imageUpload = document.getElementById('image-upload');
-    const uploadButton = document.getElementById('upload-button');
     const playPauseBtn = document.getElementById('play-pause');
 
     let isPlaying = false;
+    let isRotating = false;
+    let currentNote = 0;
 
     const topY = 90; // 오선지 상단 y 좌표
     const bottomY = 110; // 오선지 하단 y 좌표
-
+    
     function rotateImage(direction) {
       const uploadedImage = document.getElementById('uploaded-image');
       if (uploadedImage) {
@@ -271,54 +271,23 @@
         });
     }
 
-
-    //재생 or 일시정지
     playPauseBtn.addEventListener('click', function() {
         isPlaying = !isPlaying; // 재생 상태를 토글
         isRotating = isPlaying; // 회전 상태도 재생 상태에 맞춤
 
         if (isPlaying) {
-        // 재생 로직
-        fetch('/play-music-url', { method: 'POST' })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Music play failed');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('음악 재생 성공:', data);
-            })
-            .catch(error => {
-                console.error('음악 재생 오류:', error);
-            });
-        this.innerHTML = '⏸️';
-    } else {
-        // 일시정지 로직
-        fetch('/pause-music-url', { method: 'POST' })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Music pause failed');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('음악 일시정지 성공:', data);
-            })
-            .catch(error => {
-                console.error('음악 일시정지 오류:', error);
-            });
-        this.innerHTML = '▶️';
-    }
+            this.innerHTML = '⏸️';
+            rotateImage('clockwise');
+            toggleNotesAnimation('running');
+            createNote();
+        } else {
+            this.innerHTML = '▶️';
+            rotateImage('stop');
+            toggleNotesAnimation('paused');
+        }
+    });
 
-    // 재생 상태에 따른 애니메이션 및 노트 생성 로직
-    rotateImage(isPlaying ? 'clockwise' : 'stop');
-    toggleNotesAnimation(isPlaying ? 'running' : 'paused');
-    if (isPlaying) createNote();
-});
-
-    // 업로드 버튼클릭
-    uploadButton.addEventListener('click', function() {
+    imageUpload.addEventListener('change', function (event) {
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = function (e) {
@@ -334,6 +303,7 @@
                 document.body.appendChild(uploadedImage);
             }
             uploadedImage.src = e.target.result;
+
             const displayArea = document.querySelector('.art-display');
             displayArea.innerHTML = ''; // 기존 이미지 제거
             const newImage = document.createElement('img');
@@ -342,12 +312,6 @@
         };
         reader.readAsDataURL(event.target.files[0]);
       }
-      // TODO: 이미지를 서버로 전송하는 AJAX 요청 구현 필요
-    });
-
-    // 파일변경?
-    imageUpload.addEventListener('change', function (event) {
-      
     });
 </script>
 </body>

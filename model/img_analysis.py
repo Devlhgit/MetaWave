@@ -105,7 +105,7 @@ def analyze_image_to_csv(image_path, color_ratios):
             fieldnames = [
                 'Filename', "Warm", "Cool",
                 "Bright", "Mid", "Dark",
-                "Red", "Orange", "Brown", "Gold", "Yellow", "Lime", "Green", "Mint", "SeaBlue", "Sky", "Blue", "Purple", "Pink",
+                "Red", "Orange", "Brown", "Gold", "Yellow", "Lime", "Pink", "Green", "Mint", "SeaBlue", "Sky", "Blue", "Purple", 
                 "Black", "White", "Grey"
             ]
 
