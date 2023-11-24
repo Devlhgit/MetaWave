@@ -136,3 +136,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'  # 이 경로를 배포용으로 변경�
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SESSION_ENGINE = "django.contrib.sessions.backends.file"
+
+# 세션 파일이 저장될 경로 (선택사항)
+SESSION_FILE_PATH = os.path.join(BASE_DIR, 'sessions')
+

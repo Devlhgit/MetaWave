@@ -1,28 +1,34 @@
-from ..model.img_analysis import Analyze_Image, Analyze_Image_To_CSV
+from model.img_analysis import Analyze_Image, Analyze_Image_To_CSV
 from django.shortcuts import render
+from django.conf import settings
+from django.http import HttpResponse
 from .models import Picture
 from joblib import load
 import os, random, pygame
 import pandas as pd
+
+import os
 import pdb
 
 # 모델 및 데이터 파일의 경로 설정
-RendomFrest_model_path = r"model\model_depth10.joblib"
+RendomFrest_model_path = r"model\model_depth5.joblib"
 mlb_path = r"model\mlb.joblib"
 csv_file_path = r"model\input_image_analysis_results.csv"
 music_folder_path = r"C:\Users\gjaischool\Desktop\jamendo"
 
-
 # 웹 페이지의 메인 페이지 처리 함수
 def mainPage(request):
-    #pdb.set_trace()
     if request.method == 'POST':
         action = request.POST.get('action')
         if action == 'upload':
             # 이미지 업로드 로직 처리
+            
             handle_image_upload(request)
         elif action == 'play':
-            # 재생
+            image_path = request.session.get('uploaded_image_path')
+            if image_path:
+                # 이미지 분석 및 음악 재생
+                mood_list = analyze_image_and_predict_mood(image_path)
             play_music(mood_list)
         elif action == 'pause':
             # 정지
@@ -36,6 +42,7 @@ def mainPage(request):
 
     return render(request, "mainPage.html")
 
+
 def handle_pause():
     # 음악 일시정지 로직 (실제 구현 필요)
     return HttpResponse("Music playback paused.")
@@ -48,24 +55,26 @@ def handle_previous():
     # 이전 곡 재생 로직 (실제 구현 필요)
     return HttpResponse("Previous music track.")
 
-
-
 def handle_image_upload(request):
     picture = request.FILES.get('picture')
     if not picture:
         return HttpResponse("No image uploaded.", status=400)
 
-    picture_instance = Picture(picture=picture)
-    picture_instance.save()
-    global mood_list
-    mood_list = analyze_image_and_predict_mood(picture_instance.picture.path)
-    
+    # 이미지 파일을 파일 시스템에 저장
+    file_path = os.path.join(settings.MEDIA_ROOT, picture.name)
+    with open(file_path, 'wb+') as destination:
+        for chunk in picture.chunks():
+            destination.write(chunk)
+    request.session['uploaded_image_path'] = file_path
+    return HttpResponse("No image uploaded.", status=400)
 
 def play_music(mood_list):
+    print("music start")
     music_files = []
     for mood in mood_list:
         music_files.extend(get_music_files_for_mood(mood))
 
+    print("Predicted Moods:", mood_list)
     selected_music_file = random.choice(music_files) if music_files else None
     pygame.init()
 
@@ -74,7 +83,6 @@ def play_music(mood_list):
         pygame.mixer.music.play()
         mood_folder = os.path.basename(os.path.dirname(selected_music_file))
 
-        print("recommender song list : ", cleaned_predicted_mood_list)
         print("recommender song count : ", len(music_files))
         print("selected Mood : ", mood_folder)
         print("Playing Music File:", selected_music_file)
@@ -100,7 +108,9 @@ def analyze_image_and_predict_mood(image_path):
     predicted_mood = RendomFrest_model[0].predict(new_data_df)
     predicted_mood_list = mlb.inverse_transform(predicted_mood)
 
-    cleaned_predicted_mood_list = [mood.strip() for mood_tuple in predicted_mood_list for mood in mood_tuple]
+    cleaned_predicted_mood_list = [mood.strip().replace("'", "").replace("{", "").replace("}", "") 
+                                   for mood_tuple in predicted_mood_list 
+                                   for mood in mood_tuple]
     return cleaned_predicted_mood_list
 
 def get_music_files_for_mood(mood):
