@@ -6,8 +6,6 @@ import os, random, pygame
 import pandas as pd
 import pdb
 
-
-
 # 모델 및 데이터 파일의 경로 설정
 RendomFrest_model_path = r"model\model_depth10.joblib"
 mlb_path = r"model\mlb.joblib"
