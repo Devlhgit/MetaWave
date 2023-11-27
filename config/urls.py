@@ -26,7 +26,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", views.mainPage),
+    path("", views.mainPage, name='mainPage'),  # URL 패턴에 이름 추가
 ]
 
 urlpatterns += static(

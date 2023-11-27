@@ -124,16 +124,12 @@ STATIC_URL = '/static/'
 # 개발 중 정적 파일을 찾을 디렉토리들을 여기에 추가합니다.
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    # 여기에 필요한 추가적인 정적 파일 디렉토리 경로를 추가할 수 있습니다.
+    
 ]
 
 # 배포 환경에서 collectstatic 명령이 사용하는 정적 파일 루트 디렉토리
 # 이 디렉토리는 개발 중에는 사용하지 않습니다.
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # 이 경로를 배포용으로 변경합니다.
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

@@ -20,10 +20,8 @@ music_folder_path = r"C:\Users\gjaischool\Desktop\jamendo"
 def mainPage(request):
     if request.method == 'POST':
         action = request.POST.get('action')
-        if action == 'upload':
-            # 이미지 업로드 로직 처리
-            
-            handle_image_upload(request)
+        if action == 'save':
+            handle_image_save(request)
         elif action == 'play':
             image_path = request.session.get('uploaded_image_path')
             if image_path:
@@ -42,7 +40,6 @@ def mainPage(request):
 
     return render(request, "mainPage.html")
 
-
 def handle_pause():
     # 음악 일시정지 로직 (실제 구현 필요)
     return HttpResponse("Music playback paused.")
@@ -55,7 +52,7 @@ def handle_previous():
     # 이전 곡 재생 로직 (실제 구현 필요)
     return HttpResponse("Previous music track.")
 
-def handle_image_upload(request):
+def handle_image_save(request):
     picture = request.FILES.get('picture')
     if not picture:
         return HttpResponse("No image uploaded.", status=400)
@@ -69,7 +66,6 @@ def handle_image_upload(request):
     return HttpResponse("No image uploaded.", status=400)
 
 def play_music(mood_list):
-    print("music start")
     music_files = []
     for mood in mood_list:
         music_files.extend(get_music_files_for_mood(mood))

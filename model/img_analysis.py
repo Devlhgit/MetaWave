@@ -108,8 +108,6 @@ def Analyze_Image_To_CSV(image_path, color_ratios):
                 "Red", "Orange", "Brown", "Gold", "Yellow", "Lime", "Pink", "Green", "Mint", "SeaBlue", "Sky", "Blue", "Purple", 
                 "Black", "White", "Grey"
             ]
-
-            
             
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
@@ -119,6 +117,7 @@ def Analyze_Image_To_CSV(image_path, color_ratios):
             
             # CSV 파일에 결과를 기록하기 위해 새로운 row 생성
             row = {
+
                 'Filename': os.path.basename(image_path),
                 'Warm': color_ratios['Warm'],
                 'Cool': color_ratios['Cool'],
@@ -141,6 +140,7 @@ def Analyze_Image_To_CSV(image_path, color_ratios):
                 'Black': color_ratios['Black'],
                 'White': color_ratios['White'],
                 'Grey': color_ratios['Grey'],
+                
             }
             
             writer.writerow(row)
