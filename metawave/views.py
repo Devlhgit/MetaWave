@@ -20,7 +20,7 @@ music_folder_path = r"C:\Users\gjaischool\Desktop\jamendo"
 def mainPage(request):
     if request.method == 'POST':
         action = request.POST.get('action')
-        if action == 'save':
+        if action == 'upload':
             handle_image_save(request)
         elif action == 'play':
             image_path = request.session.get('uploaded_image_path')
